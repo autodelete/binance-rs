@@ -14,12 +14,13 @@ pub struct Market {
 // Market Data endpoints
 impl Market {
     // Order book (Default 100; max 100)
-    pub fn get_depth<S>(&self, symbol: S) -> Result<(OrderBook)>
+    pub fn get_depth<S>(&self, symbol: S, limit: i32) -> Result<(OrderBook)>
         where S: Into<String>
     {
         let mut parameters: BTreeMap<String, String> = BTreeMap::new();
 
         parameters.insert("symbol".into(), symbol.into());
+        parameters.insert("limit".into(), format!("{}", limit));
         let request = build_request(&parameters);
 
         let data = self.client.get("/api/v1/depth", &request)?;

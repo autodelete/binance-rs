@@ -98,7 +98,7 @@ fn market_data() {
     let market: Market = Binance::new(None, None);
 
     // Order book
-    match market.get_depth("BNBETH") {
+    match market.get_depth("BNBETH", 10) {
         Ok(answer) => println!("{:?}", answer),
         Err(e) => println!("Error: {}", e),
     }
